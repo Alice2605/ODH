@@ -35,7 +35,7 @@ def donnees_cgfl(df):
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_cgfl) # Récupère les variables de label, couleur, source, target et valeur
     fig_cgfl_sankey = cree_sankey(labels_reel, label_color, links) # Sankey
 
-    return fig_cgfl_sankey
+    return fig_cgfl_sankey, fig_cgfl_sunburst
 
 
 
@@ -58,7 +58,7 @@ def donnees_tout(df):
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_tout) # Récupère les variables de label, couleur, source, target et valeur
     fig_tout_sankey = cree_sankey(labels_reel, label_color, links)
 
-    return fig_tout_sankey
+    return fig_tout_sankey, fig_tout_sunburst
 
 
 
