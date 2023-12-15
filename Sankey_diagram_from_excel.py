@@ -25,7 +25,7 @@ if uploaded_file is not None: # Une fois qu'un fichier est importé
 
     # Si CGFL sélectionné dans le menu déroulant
     if selected_option == 'CGFL':
-        fig_cgfl_sankey = donnees_cgfl(df)
+        fig_cgfl_sankey, _ = donnees_cgfl(df)
 
         fig_cgfl_sankey.update_layout(title_text="Patients ayant reçu du trastuzumab au CGFL", 
                         title_font_size=30,
@@ -37,7 +37,7 @@ if uploaded_file is not None: # Une fois qu'un fichier est importé
 
     # Si TOUT sélectionné dans le menu déroulant (tous les centres)
     if selected_option == 'TOUT':
-        fig_tout_sankey = donnees_tout(df)
+        fig_tout_sankey, _ = donnees_tout(df)
 
         fig_tout_sankey.update_layout(title_text="Tous les patients ayant reçu du trastuzumab", 
                         title_font_size=30, 
@@ -45,8 +45,5 @@ if uploaded_file is not None: # Une fois qu'un fichier est importé
                         ) # Change la taille de police du TITRE
         fig_tout_sankey.update_traces(textfont_size=12) # Change la taille de police du texte des NOEUDS
         st.plotly_chart(fig_tout_sankey) # Affiche le graphique
-
-
-
 
 
