@@ -18,7 +18,7 @@ selected_option = st.selectbox('Sélectionnez une option', options)
 
 
 if selected_option == 'CGFL':
-
+    _, fig_cgfl_sunburst = donnees_cgfl(df)
     fig_cgfl_sunburst.update_layout(#title_text="Patients ayant reçu du trastuzumab au CGFL", 
         #title_font_size=20,
         template="plotly_white",
@@ -34,7 +34,7 @@ if selected_option == 'CGFL':
 
 
 if selected_option == 'TOUT':
-
+    _, fig_tout_sunburst = donnees_tout(df)
     fig_tout_sunburst.update_layout(#title_text="Patients ayant reçu du trastuzumab (tous centres)", 
         #title_font_size=20,
         template="plotly_white",
