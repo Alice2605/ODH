@@ -28,14 +28,14 @@ def donnees_cgfl(df):
     colonnes = df_trastuzumab_cgfl.columns[:-1].tolist()
 
 
-    fig_cgfl_sunburst = px.sunburst(df_trastuzumab_cgfl[df_trastuzumab_cgfl != "NaN"], path=colonnes, values='VALUE') # Sunburst
+    #fig_cgfl_sunburst = px.sunburst(df_trastuzumab_cgfl[df_trastuzumab_cgfl != "NaN"], path=colonnes, values='VALUE') # Sunburst
 
     df_trastuzumab_cgfl.fillna("NaN", inplace=True)
 
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_cgfl) # Récupère les variables de label, couleur, source, target et valeur
     fig_cgfl_sankey = cree_sankey(labels_reel, label_color, links) # Sankey
 
-    return fig_cgfl_sankey, fig_cgfl_sunburst
+    return fig_cgfl_sankey#, fig_cgfl_sunburst
 
 
 
