@@ -28,14 +28,14 @@ def donnees_cgfl(df):
     colonnes = df_trastuzumab_cgfl.columns[:-1].tolist()
 
 
-    #fig_cgfl_sunburst = px.sunburst(df_trastuzumab_cgfl[df_trastuzumab_cgfl != "NaN"], path=colonnes, values='VALUE') # Sunburst
+    fig_cgfl_sunburst = px.sunburst(df_trastuzumab_cgfl[pd.notna(df_trastuzumab_cgfl)], path=colonnes, values='VALUE') # Sunburst
 
     df_trastuzumab_cgfl.fillna("NaN", inplace=True)
 
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_cgfl) # Récupère les variables de label, couleur, source, target et valeur
     fig_cgfl_sankey = cree_sankey(labels_reel, label_color, links) # Sankey
 
-    return fig_cgfl_sankey#, fig_cgfl_sunburst
+    return fig_cgfl_sankey, fig_cgfl_sunburst
 
 
 
@@ -53,7 +53,7 @@ def donnees_tout(df):
 
     colonnes = df_trastuzumab_tout.columns[:-1].tolist()
 
-    fig_tout_sunburst = px.sunburst(df_trastuzumab_tout[df_trastuzumab_tout != "NaN"], path=colonnes, values='VALUE')
+    fig_tout_sunburst = px.sunburst(df_trastuzumab_tout[pd.notna(df_trastuzumab_tout)], path=colonnes, values='VALUE')
 
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_tout) # Récupère les variables de label, couleur, source, target et valeur
     fig_tout_sankey = cree_sankey(labels_reel, label_color, links)
