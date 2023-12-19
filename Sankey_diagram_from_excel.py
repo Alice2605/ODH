@@ -24,7 +24,6 @@ if uploaded_file is not None: # Une fois qu'un fichier est importé
 
 
     # Si CGFL sélectionné dans le menu déroulant
-    st.cache_data
     if selected_option == 'CGFL':
         fig_cgfl_sankey = donnees_cgfl(df) # , _ for sunburst
 
@@ -37,7 +36,6 @@ if uploaded_file is not None: # Une fois qu'un fichier est importé
 
 
     # Si TOUT sélectionné dans le menu déroulant (tous les centres)
-    st.cache_data
     if selected_option == 'TOUT':
         fig_tout_sankey, _ = donnees_tout(df)
 
