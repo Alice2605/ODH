@@ -25,7 +25,7 @@ if uploaded_file is not None: # Une fois qu'un fichier est importé
 
     # Si CGFL sélectionné dans le menu déroulant
     if selected_option == 'CGFL':
-        fig_cgfl_sankey = donnees_cgfl(df) # , _ for sunburst
+        fig_cgfl_sankey, _ = donnees_cgfl(df) # , _ for sunburst
 
         fig_cgfl_sankey.update_layout(title_text="Patients ayant reçu du trastuzumab au CGFL", 
                         title_font_size=30,
