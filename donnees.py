@@ -20,8 +20,8 @@ def donnees_centre(df, id):
     colonnes = df_trastuzumab_centre.columns[:-1].tolist()
 
     
-    fig_centre_sunburst = px.sunburst(df_trastuzumab_centre[df_trastuzumab_centre != "NaN"], path=colonnes, values='VALUE') # Sunburst
-
+    #fig_centre_sunburst = px.sunburst(df_trastuzumab_centre[df_trastuzumab_centre != "NaN"], path=colonnes, values='VALUE') # Sunburst
+    fig_centre_sunburst = px.sunburst(df_trastuzumab_centre, path=colonnes, values='VALUE') # Sunburst
     
 
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_centre) # Récupère les variables de label, couleur, source, target et valeur
