@@ -3,39 +3,31 @@ import plotly.express as px
 from functions import *
 import pandas as pd
 
-"""
-excel_file_path = 'Export_base_ODH_SEIN.xlsx'
-df = pd.read_excel(excel_file_path)
-"""
 
-#from Sankey_diagram_from_excel import uploaded_file
-
-#df = pd.read_excel(uploaded_file)
-
-#################### CGFL
+#################### Un seul centre
 st.cache_data
-def donnees_cgfl(df):
-    df_cgfl = df[
-        (df['ID_HOPITAL'] == 210987731) &
+def donnees_centre(df, id):
+    df_centre = df[
+        (df['ID_HOPITAL'] == id) &
         (df['IDPATIENT'].isin(df[df['PRODUIT1'].isin(['trastuzumab', 'trastuzumab emtansine', 'trastuzumab duocarmazine', 'trastuzumab deruxtecan'])]['IDPATIENT']))
     ]
-    df_cgfl = df_cgfl[['IDPATIENT', 'SUB_NUM_PROTO', 'PROTO', 'STADE_TRT', 'DT1DATEADMP']]
-    df_cgfl = df_cgfl.sort_values(by=['IDPATIENT', 'DT1DATEADMP'])
+    df_centre = df_centre[['IDPATIENT', 'SUB_NUM_PROTO', 'PROTO', 'STADE_TRT', 'DT1DATEADMP']]
+    df_centre = df_centre.sort_values(by=['IDPATIENT', 'DT1DATEADMP'])
 
 
-    df_trastuzumab_cgfl = df_to_df_trastuzumab(df_cgfl) # Crée la table avec les lignes de protocoles et leur fréquence
+    df_trastuzumab_centre = df_to_df_trastuzumab(df_centre) # Crée la table avec les lignes de protocoles et leur fréquence
 
-    colonnes = df_trastuzumab_cgfl.columns[:-1].tolist()
+    colonnes = df_trastuzumab_centre.columns[:-1].tolist()
 
+    
+    fig_centre_sunburst = px.sunburst(df_trastuzumab_centre[df_trastuzumab_centre != "NaN"], path=colonnes, values='VALUE') # Sunburst
 
-    fig_cgfl_sunburst = px.sunburst(df_trastuzumab_cgfl[pd.notna(df_trastuzumab_cgfl)], path=colonnes, values='VALUE') # Sunburst
+    
 
-    df_trastuzumab_cgfl.fillna("NaN", inplace=True)
+    labels_reel, label_color, links = donnees_diagram(df_trastuzumab_centre) # Récupère les variables de label, couleur, source, target et valeur
+    fig_centre_sankey = cree_sankey(labels_reel, label_color, links) # Sankey
 
-    labels_reel, label_color, links = donnees_diagram(df_trastuzumab_cgfl) # Récupère les variables de label, couleur, source, target et valeur
-    fig_cgfl_sankey = cree_sankey(labels_reel, label_color, links) # Sankey
-
-    return fig_cgfl_sankey, fig_cgfl_sunburst
+    return fig_centre_sankey, fig_centre_sunburst
 
 
 
@@ -53,7 +45,7 @@ def donnees_tout(df):
 
     colonnes = df_trastuzumab_tout.columns[:-1].tolist()
 
-    fig_tout_sunburst = px.sunburst(df_trastuzumab_tout[pd.notna(df_trastuzumab_tout)], path=colonnes, values='VALUE')
+    fig_tout_sunburst = px.sunburst(df_trastuzumab_tout[df_trastuzumab_tout != "NaN"], path=colonnes, values='VALUE')
 
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_tout) # Récupère les variables de label, couleur, source, target et valeur
     fig_tout_sankey = cree_sankey(labels_reel, label_color, links)
