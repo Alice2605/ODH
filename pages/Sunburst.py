@@ -24,7 +24,7 @@ selected_option = st.selectbox('Sélectionnez un centre', options)
 
 if selected_option in liste_hopitaux:
     df_trie_centre = donnees_centre(df, selected_option)
-    _, fig_centre_sunburst = fig_centre(df_trie_centre)
+    _, fig_centre_sunburst = fig(df_trie_centre)
     fig_centre_sunburst.update_layout(
         #title_text="Patients ayant reçu du trastuzumab au centre", 
         #title_font_size=20,
@@ -43,8 +43,8 @@ if selected_option in liste_hopitaux:
 
 
 if selected_option == 'TOUT':
-    df_trie_tout = donnees_centre(df)
-    _, fig_tout_sunburst = fig_tout(df_trie_tout)
+    df_trie_tout = donnees_tout(df)
+    _, fig_tout_sunburst = fig(df_trie_tout)
     fig_tout_sunburst.update_layout(
         #title_text="Patients ayant reçu du trastuzumab (tous centres)", 
         #title_font_size=20,
