@@ -24,7 +24,7 @@ selected_option = st.selectbox('Sélectionnez un centre', options)
 # Si un centre est sélectionné dans le menu déroulant
 if selected_option in liste_hopitaux:
     df_trie_centre = donnees_centre(df, selected_option)
-    fig_centre_sankey, _ = fig_tout(df_trie_centre) 
+    fig_centre_sankey, _ = fig(df_trie_centre) 
 
     fig_centre_sankey.update_layout(
         #title_text="Patients ayant reçu du trastuzumab au centre", 
@@ -40,7 +40,7 @@ if selected_option in liste_hopitaux:
 # Si TOUT sélectionné dans le menu déroulant (tous les centres)
 if selected_option == 'TOUT':
     df_trie_tout = donnees_tout(df)
-    fig_tout_sankey, _ = fig_tout(df_trie_tout)
+    fig_tout_sankey, _ = fig(df_trie_tout)
 
     fig_tout_sankey.update_layout(
         title_text="Tous les patients ayant reçu du trastuzumab", 
