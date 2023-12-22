@@ -45,7 +45,7 @@ def donnees_tout(df):
 
     colonnes = df_trastuzumab_tout.columns[:-1].tolist()
 
-    fig_tout_sunburst = px.sunburst(df_trastuzumab_tout[df_trastuzumab_tout != "NaN"], path=colonnes, values='VALUE')
+    fig_tout_sunburst = px.sunburst(df_trastuzumab_tout, path=colonnes, values='VALUE')
 
     labels_reel, label_color, links = donnees_diagram(df_trastuzumab_tout) # Récupère les variables de label, couleur, source, target et valeur
     fig_tout_sankey = cree_sankey(labels_reel, label_color, links)
