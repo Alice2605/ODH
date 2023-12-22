@@ -14,17 +14,17 @@ def donnees_centre(df, id):
     df_centre = df_centre[['IDPATIENT', 'SUB_NUM_PROTO', 'PROTO', 'STADE_TRT', 'DT1DATEADMP']]
     df_centre = df_centre.sort_values(by=['IDPATIENT', 'DT1DATEADMP'])
 
+    df_trie_centre = df_trie(df_centre) # Crée la table avec les lignes de protocoles et leur fréquence
 
-    df_trastuzumab_centre = df_to_df_trastuzumab(df_centre) # Crée la table avec les lignes de protocoles et leur fréquence
+    return df_trie_centre
 
-    colonnes = df_trastuzumab_centre.columns[:-1].tolist()
 
-    
-    #fig_centre_sunburst = px.sunburst(df_trastuzumab_centre[df_trastuzumab_centre != "NaN"], path=colonnes, values='VALUE') # Sunburst
-    fig_centre_sunburst = px.sunburst(df_trastuzumab_centre, path=colonnes, values='VALUE') # Sunburst
-    
+def fig_centre(df_trie_centre):
+    colonnes = df_trie_centre.columns[:-1].tolist()
 
-    labels_reel, label_color, links = donnees_diagram(df_trastuzumab_centre) # Récupère les variables de label, couleur, source, target et valeur
+    fig_centre_sunburst = px.sunburst(df_trie_centre, path=colonnes, values='VALUE') # Sunburst
+
+    labels_reel, label_color, links = donnees_diagram(df_trie_centre) # Récupère les variables de label, couleur, source, target et valeur
     fig_centre_sankey = cree_sankey(labels_reel, label_color, links) # Sankey
 
     return fig_centre_sankey, fig_centre_sunburst
@@ -40,18 +40,18 @@ def donnees_tout(df):
     df_tout = df_tout[['IDPATIENT', 'SUB_NUM_PROTO', 'PROTO', 'STADE_TRT', 'DT1DATEADMP']]
     df_tout = df_tout.sort_values(by=['IDPATIENT', 'DT1DATEADMP'])
 
+    df_trie_tout = df_trie(df_tout)
 
-    df_trastuzumab_tout = df_to_df_trastuzumab(df_tout)
+    return df_trie_tout
 
-    colonnes = df_trastuzumab_tout.columns[:-1].tolist()
 
-    fig_tout_sunburst = px.sunburst(df_trastuzumab_tout, path=colonnes, values='VALUE')
+def fig_tout(df_trie_tout):
+    colonnes = df_trie_tout.columns[:-1].tolist()
 
-    labels_reel, label_color, links = donnees_diagram(df_trastuzumab_tout) # Récupère les variables de label, couleur, source, target et valeur
+    fig_tout_sunburst = px.sunburst(df_trie_tout, path=colonnes, values='VALUE')
+
+    labels_reel, label_color, links = donnees_diagram(df_trie_tout) # Récupère les variables de label, couleur, source, target et valeur
     fig_tout_sankey = cree_sankey(labels_reel, label_color, links)
 
     return fig_tout_sankey, fig_tout_sunburst
-
-
-
 
