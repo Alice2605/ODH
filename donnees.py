@@ -4,7 +4,7 @@ from functions import *
 import pandas as pd
 
 
-#################### Un seul centre
+# Un seul centre
 st.cache_data
 def donnees_centre(df, id):
     df_centre = df[
@@ -19,19 +19,7 @@ def donnees_centre(df, id):
     return df_trie_centre
 
 
-def fig_centre(df_trie_centre):
-    colonnes = df_trie_centre.columns[:-1].tolist()
-
-    fig_centre_sunburst = px.sunburst(df_trie_centre, path=colonnes, values='VALUE') # Sunburst
-
-    labels_reel, label_color, links = donnees_diagram(df_trie_centre) # Récupère les variables de label, couleur, source, target et valeur
-    fig_centre_sankey = cree_sankey(labels_reel, label_color, links) # Sankey
-
-    return fig_centre_sankey, fig_centre_sunburst
-
-
-
-#################### TOUT
+# TOUT
 @st.cache_data
 def donnees_tout(df):
     df_tout = df[
@@ -45,13 +33,14 @@ def donnees_tout(df):
     return df_trie_tout
 
 
-def fig_tout(df_trie_tout):
-    colonnes = df_trie_tout.columns[:-1].tolist()
+# Sankey et sunburst
+def fig(df_trie):
+    colonnes = df_trie.columns[:-1].tolist()
 
-    fig_tout_sunburst = px.sunburst(df_trie_tout, path=colonnes, values='VALUE')
+    fig_sunburst = px.sunburst(df_trie, path=colonnes, values='VALUE')
 
-    labels_reel, label_color, links = donnees_diagram(df_trie_tout) # Récupère les variables de label, couleur, source, target et valeur
-    fig_tout_sankey = cree_sankey(labels_reel, label_color, links)
+    labels_reel, label_color, links = donnees_diagram(df_trie) # Récupère les variables de label, couleur, source, target et valeur
+    fig_sankey = cree_sankey(labels_reel, label_color, links)
 
-    return fig_tout_sankey, fig_tout_sunburst
+    return fig_sankey, fig_sunburst
 
