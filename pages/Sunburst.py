@@ -23,7 +23,8 @@ selected_option = st.selectbox('Sélectionnez un centre', options)
 
 
 if selected_option in liste_hopitaux:
-    _, fig_centre_sunburst = donnees_centre(df, selected_option)
+    df_trie_centre = donnees_centre(df, selected_option)
+    _, fig_centre_sunburst = fig_centre(df_trie_centre)
     fig_centre_sunburst.update_layout(
         #title_text="Patients ayant reçu du trastuzumab au centre", 
         #title_font_size=20,
@@ -37,12 +38,13 @@ if selected_option in liste_hopitaux:
     fig_centre_sunburst.update_traces(textfont_size=20) # Change la taille de police du texte des NOEUDS
     st.plotly_chart(fig_centre_sunburst)
 
-    st.download_button(label="Télécharger le graph au format html", data=fig_centre_sunburst.to_html(full_html=False), file_name="Sunburst_diagram.html")
+    st.download_button(label="Télécharger le diagramme au format html", data=fig_centre_sunburst.to_html(full_html=False), file_name="Sunburst_diagram.html")
 
 
 
 if selected_option == 'TOUT':
-    _, fig_tout_sunburst = donnees_tout(df)
+    df_trie_tout = donnees_centre(df)
+    _, fig_tout_sunburst = fig_tout(df_trie_tout)
     fig_tout_sunburst.update_layout(
         #title_text="Patients ayant reçu du trastuzumab (tous centres)", 
         #title_font_size=20,
@@ -55,5 +57,5 @@ if selected_option == 'TOUT':
     
     fig_tout_sunburst.update_traces(textfont_size=20) # Change la taille de police du texte des NOEUDS
     st.plotly_chart(fig_tout_sunburst)
-    st.download_button(label="Télécharger le graph au format html", data=fig_tout_sunburst.to_html(full_html=False), file_name="Sunburst_diagram_tout.html")
+    st.download_button(label="Télécharger le diagramme au format html", data=fig_tout_sunburst.to_html(full_html=False), file_name="Sunburst_diagram_tout.html")
 
